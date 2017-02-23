@@ -1,5 +1,6 @@
 package TicTacToe;
 
+
 /**
  * Created by alexandraquintano on 2/23/17.
  */
@@ -17,14 +18,21 @@ public class Game {
 
 
     Game() {
-        board = new Board();
+        board = Board.getInstance();
         player1 = new Player("X");
         player2 = new Player("O");
     }
 
     public void play() {
+        board.printState();
+        player1.takeTurn();
+        board.printState();
 
     }
+
+//    private boolean isGameOver() {
+//        return false;
+//    }
 
 
 }

@@ -12,13 +12,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
  */
 public class PlayerTest {
 
-    @Test
-    public void playerCanAddTo  Board() {
-        Player player = new Player("X");
-        Board board = new Board();
 
-        player.takeTurn(1, 1);
 
-        assertThat(board.state[1][1], is(player.symbol));
-    }
+
 }
