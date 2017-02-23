@@ -12,29 +12,30 @@ public class Game {
     }
 
 
-    Board board;
-    Player player1;
-    Player player2;
+    private Board board;
+    private Player player1;
+    private Player player2;
 
-
-    Game() {
+    public Game() {
         board = Board.getInstance();
         player1 = new Player("X");
         player2 = new Player("O");
     }
 
     public void play() {
-        board.printState();
-        player1.takeTurn();
-        board.printState();
-        player2.takeTurn();
-        board.printState();
-
+        while (isGameOver()) {
+            player1.takeTurn();
+            board.printState();
+            player2.takeTurn();
+            board.printState();
+        }
     }
 
-//    private boolean isGameOver() {
-//        return false;
-//    }
-
+    public boolean isGameOver(){
+        if (Board.isFull())
+            return true;
+        else
+            return false;
+    }
 
 }
