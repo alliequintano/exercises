@@ -27,6 +27,8 @@ public class Game {
         board.printState();
         player1.takeTurn();
         board.printState();
+        player2.takeTurn();
+        board.printState();
 
     }
 

@@ -18,15 +18,26 @@ public class Board {
     }
 
     private static class BoardHolder {
+
         private static Board INSTANCE = new Board();
     }
-
     public static Board getInstance() {
         return BoardHolder.INSTANCE;
     }
 
-    public static void add(String symbol, int col, int row) {
-        state[col][row] = symbol;
+    public static boolean addIfFieldIsOpen(String symbol, int col, int row) {
+        if (!fieldIsTaken(col, row)) {
+            state[col][row] = symbol;
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    private static boolean fieldIsTaken(int col, int row) {
+        if (state[col][row] != "_")
+            return true;
+        return false;
     }
 
     public static void printState() {
