@@ -7,26 +7,17 @@ import java.util.Arrays;
  * Created by alexandraquintano on 2/23/17.
  */
 public class Board {
-    public static String[][] state;
+    private String[][] state;
 
-    private Board() {
-        state = new String[][]{
-                {"_", "_", "_"},
-                {"_", "_", "_"},
-                {"_", "_", "_"}
-        };
+    public Board(String[][] state) {
+        this.state = state;
     }
 
-    private static class BoardHolder {
-
-        private static Board INSTANCE = new Board();
-
+    public String[][] getState() {
+        return state;
     }
 
-    public static Board getInstance() {
-        return BoardHolder.INSTANCE;
-    }
-    public static boolean addIfFieldIsOpen(String symbol, int col, int row) {
+    public boolean addIfFieldIsOpen(String symbol, int col, int row) {
         if (!fieldIsTaken(col, row)) {
             state[col][row] = symbol;
             return true;
@@ -34,13 +25,13 @@ public class Board {
             return false;
         }
     }
-    private static boolean fieldIsTaken(int col, int row) {
+    private boolean fieldIsTaken(int col, int row) {
         if (state[col][row] != "_")
             return true;
         return false;
     }
 
-    public static boolean isFull() {
+    public boolean isFull() {
         for (String[] col : state) {
             for (String field : col) {
                 if (field == "_")
@@ -50,19 +41,30 @@ public class Board {
         return true;
     }
 
-    public static boolean hasThreeInARow() {
-        int count = 0;
-        for (String[] col : state) {
-            for (String field : col) {
-                if (field == col[0] && col[0] != "_")
+    public boolean hasThreeInARow() {
+        for (String[] row : state) {
+            int count = 0;
+            for (String field : row) {
+                if (field == row[0] && row[0] != "_")
                     count++;
+                if (count == 3) return true;
             }
         }
-        if (count == 3) return true;
-        else return false;
+        return false;
     }
 
-    public static void printState() {
+    public boolean hasThreeInAColumn() {
+        for (int col = 0; col < 3; col++) {
+            int count = 0;
+            for (int row = 0; row < 3; row++)
+                if (state[row][col] == state[0][col] && state[0][col] != "_")
+                    count++;
+            if (count == 3) return true;
+        }
+        return false;
+    }
+
+    public void printState() {
         for (String[] col : state) {
             for (String field : col) {
                 System.out.print(field);
