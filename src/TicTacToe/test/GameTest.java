@@ -5,7 +5,6 @@ import TicTacToe.Game;
 import org.junit.Test;
 
 import static junit.framework.Assert.assertTrue;
-import static org.hamcrest.MatcherAssert.assertThat;
 
 /**
  * Created by alexandraquintano on 2/23/17.
@@ -21,6 +20,18 @@ public class GameTest {
                 board.addIfFieldIsOpen("X", i, j);
             }
         }
+        assertTrue(game.isGameOver());
+    }
+
+    @Test
+    public void shouldEndGameWhenBoardHasColumnOfSameSymbol() {
+        Game game = new Game();
+        Board board = Board.getInstance();
+
+        board.addIfFieldIsOpen("Z",1, 0);
+        board.addIfFieldIsOpen("Z",1, 1);
+        board.addIfFieldIsOpen("Z",1, 2);
+
         assertTrue(game.isGameOver());
     }
 

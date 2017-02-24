@@ -32,7 +32,7 @@ public class Game {
     }
 
     public boolean isGameOver(){
-        if (Board.isFull())
+        if (Board.isFull() || Board.hasThreeInARow())
             return true;
         else
             return false;

@@ -22,6 +22,7 @@ public class Board {
         private static Board INSTANCE = new Board();
 
     }
+
     public static Board getInstance() {
         return BoardHolder.INSTANCE;
     }
@@ -33,7 +34,6 @@ public class Board {
             return false;
         }
     }
-
     private static boolean fieldIsTaken(int col, int row) {
         if (state[col][row] != "_")
             return true;
@@ -48,6 +48,18 @@ public class Board {
             }
         }
         return true;
+    }
+
+    public static boolean hasThreeInARow() {
+        int count = 0;
+        for (String[] col : state) {
+            for (String field : col) {
+                if (field == col[0] && col[0] != "_")
+                    count++;
+            }
+        }
+        if (count == 3) return true;
+        else return false;
     }
 
     public static void printState() {
