@@ -15,7 +15,7 @@ public class BoardTest {
 
     @Test
     public void shouldAddSymbolToBoardAtPosition() {
-        Board board = new Board(new String[][]{
+        Board board = new Board( new String[][]{
                 {"_", "_", "_"},
                 {"_", "_", "_"},
                 {"_", "_", "_"}
@@ -28,7 +28,7 @@ public class BoardTest {
 
     @Test
     public void shouldNotAddToBoardWhenFieldAlreadyTaken() {
-        Board board = new Board(new String[][]{
+        Board board = new Board( new String[][]{
                 {"O", "_", "_"},
                 {"_", "_", "_"},
                 {"_", "_", "_"}
@@ -59,5 +59,16 @@ public class BoardTest {
         });
 
         assertTrue(board.hasThreeInARow());
+    }
+
+    @Test
+    public void shouldReturnTrueWhenBoardHasDiagonalOfSameSymbol() {
+        Board board = new Board(new String[][] {
+                { "*", "_", "_"},
+                { "_", "*", "_"},
+                { "_", "_", "*"}
+        });
+
+        assertTrue(board.hasThreeInADiagonal());
     }
 }

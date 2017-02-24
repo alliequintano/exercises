@@ -42,7 +42,7 @@ public class Game {
     }
 
     public boolean isGameOver(){
-        if (board.isFull() || board.hasThreeInARow() || board.hasThreeInAColumn())
+        if (board.isFull() || board.hasThreeInARow() || board.hasThreeInAColumn() || board.hasThreeInADiagonal())
             return true;
         else
             return false;

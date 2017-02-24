@@ -64,6 +64,18 @@ public class Board {
         return false;
     }
 
+    public boolean hasThreeInADiagonal() {
+        if (state[1][1] != "_") {
+            if ((state[1][1] == state[0][0] && state[1][1] == state[2][2]) ||
+                    (state[1][1] == state[0][2] && state[1][1] == state[2][0]))
+                return true;
+            else
+                return false;
+        } else {
+            return false;
+        }
+    }
+
     public void printState() {
         for (String[] col : state) {
             for (String field : col) {

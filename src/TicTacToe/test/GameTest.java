@@ -43,4 +43,15 @@ public class GameTest {
         assertTrue(game.isGameOver());
     }
 
+    @Test
+    public void shouldReturnTrueWhenBoardHasDiagonalOfSameSymbol() {
+        Game game = new Game( new String[][] {
+                { "*", "_", "_"},
+                { "_", "*", "_"},
+                { "_", "_", "*"}
+        });
+
+        assertTrue(game.isGameOver());
+    }
+
 }
