@@ -26,19 +26,6 @@ public class BoardTest {
     }
 
     @Test
-    public void shouldNotAddToBoardWhenFieldAlreadyTaken() {
-        Board board = new Board( new String[][]{
-                new String[] {"O", "_", "_"},
-                new String[] {"_", "_", "_"},
-                new String[] {"_", "_", "_"}
-        });
-
-        board.addToBoard("X", new int[] {0,0});
-
-        assertThat(board.getState()[0][0], is("O"));
-    }
-
-    @Test
     public void shouldReturnTrueWhenBoardHasColumnOfSameSymbol() {
         Board board = new Board( new String[][] {
                 new String[] { "X", "_", "_"},

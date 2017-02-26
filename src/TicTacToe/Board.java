@@ -11,6 +11,7 @@ public class Board {
         this.state = state;
     }
 
+//    only using this method for tests :(
     public String[][] getState() {
         return state;
     }
@@ -27,9 +28,9 @@ public class Board {
     }
 
     public boolean fieldIsOpen(int[] coordinates) {
-        if (state[coordinates[0]][coordinates[1]] != "_")
-            return false;
-        return true;
+        if (state[coordinates[0]][coordinates[1]] == "_")
+            return true;
+        return false;
     }
 
     public boolean isFull() {

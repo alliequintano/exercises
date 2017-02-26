@@ -14,7 +14,7 @@ public class Player {
         this.symbol = symbol;
     }
 
-    public int[] takeTurn(Board board) {
+    public int[] makeMove(Board board) {
         int[] coordinates = new int[2];
         System.out.println("Enter a position: ");
         coordinates[0] = input.nextInt();

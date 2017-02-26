@@ -17,36 +17,20 @@ public class Game {
     }
 
     public void play() {
-        int[] move;
-        boolean turnIsOver = false;
-
         do {
+            board.printState();
             if (!isGameOver()) {
-                while (!turnIsOver) {
-                    move = player1.takeTurn(board);
-                    if (!board.fieldIsOpen(move)) {
-                        board = board.addToBoard(player1.symbol, move);
-                        turnIsOver = true;
-                    }
-                    board.printState();
-                }
-                turnIsOver = false;
-            } else break;
+                board = playerTurn(player1.makeMove(board), player1, board);
+            }
+            else break;
+
+            board.printState();
+            if (!isGameOver())
+                board = playerTurn(player2.makeMove(board), player2, board);
+            else break;
+
         } while(true);
     }
-//            if (!isGameOver()) {
-//                while (!turnIsOver) {
-//                    move = player1.takeTurn(board);
-//                    if (!board.fieldIsOpen(move)) {
-//                        board = board.addToBoard(player1.symbol, move);
-//                        turnIsOver = true;
-//                    }
-//                    board.printState();
-//                }
-//                    turnIsOver = false;
-//            } else {
-//                break;
-//            }
 
     public boolean isGameOver(){
         if (    board.isFull() ||
@@ -57,13 +41,20 @@ public class Game {
         else
             return false;
     }
-//
-//    public Board playerTurn(Player player) {
-//
-//        boolean turnIsOver = false;
-//        while (!turnIsOver) {
-//            move = player.takeTurn(board);
-//            board.canAddSymbolToBoard(move)
-//        }
-//    }
+
+    private Board playerTurn(int[] move, Player player, Board board) {
+        boolean turnIsOver = false;
+
+        while (!turnIsOver) {
+            if (board.fieldIsOpen(move)) {
+                board = board.addToBoard(player.symbol, move);
+                turnIsOver = true;
+            } else {
+                System.out.println("Sorry that spots taken. Try again ;)");
+                board.printState();
+                move = player.makeMove(board);
+            }
+        }
+        return board;
+    }
 }
