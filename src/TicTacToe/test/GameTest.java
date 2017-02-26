@@ -2,6 +2,7 @@ package TicTacToe.test;
 
 import TicTacToe.Board;
 import TicTacToe.Game;
+import TicTacToe.Player;
 import org.junit.Test;
 
 import static junit.framework.Assert.assertTrue;
@@ -13,43 +14,48 @@ public class GameTest {
 
     @Test
     public void shouldEndGameWhenBoardIsFull() {
-        Game game = new Game(new String[][] {
-                { "X", "X", "X"},
-                { "X", "X", "X"},
-                { "X", "X", "X"}
+        Board board = new Board( new String[][] {
+                {"X", "X", "X"},
+                {"X", "X", "X"},
+                {"X", "X", "X"}
         });
+        Game game = new Game(board, new Player("X"), new Player("O"));
+
         assertTrue(game.isGameOver());
     }
 
     @Test
     public void shouldEndGameWhenBoardHasRowOfSameSymbol() {
-        Game game = new Game(new String[][] {
+        Board board = new Board( new String[][] {
                 { "X", "X", "X"},
                 { "_", "_", "_"},
                 { "_", "_", "_"}
         });
+        Game game = new Game(board, new Player("X"), new Player("O"));
 
         assertTrue(game.isGameOver());
     }
 
     @Test
     public void shouldEndGameWhenBoardHasColumnOfSameSymbol() {
-        Game game = new Game( new String[][] {
+        Board board = new Board( new String[][] {
                 { "X", "_", "_"},
                 { "X", "_", "_"},
                 { "X", "_", "_"}
         });
+        Game game = new Game(board, new Player("X"), new Player("O"));
 
         assertTrue(game.isGameOver());
     }
 
     @Test
     public void shouldReturnTrueWhenBoardHasDiagonalOfSameSymbol() {
-        Game game = new Game( new String[][] {
+        Board board = new Board( new String[][] {
                 { "*", "_", "_"},
                 { "_", "*", "_"},
                 { "_", "_", "*"}
         });
+        Game game = new Game(board, new Player("X"), new Player("O"));
 
         assertTrue(game.isGameOver());
     }

@@ -1,7 +1,6 @@
 package TicTacToe.test;
 
 import TicTacToe.Board;
-import TicTacToe.Game;
 import org.junit.Test;
 
 import static junit.framework.Assert.assertTrue;
@@ -16,12 +15,12 @@ public class BoardTest {
     @Test
     public void shouldAddSymbolToBoardAtPosition() {
         Board board = new Board( new String[][]{
-                {"_", "_", "_"},
-                {"_", "_", "_"},
-                {"_", "_", "_"}
+                new String[] {"_", "_", "_"},
+                new String[] {"_", "_", "_"},
+                new String[] {"_", "_", "_"}
         });
 
-        board.addIfFieldIsOpen("X", 1, 1);
+        board = board.addToBoard("X", new int[] {1,1});
 
         assertThat(board.getState()[1][1], is("X"));
     }
@@ -29,12 +28,12 @@ public class BoardTest {
     @Test
     public void shouldNotAddToBoardWhenFieldAlreadyTaken() {
         Board board = new Board( new String[][]{
-                {"O", "_", "_"},
-                {"_", "_", "_"},
-                {"_", "_", "_"}
+                new String[] {"O", "_", "_"},
+                new String[] {"_", "_", "_"},
+                new String[] {"_", "_", "_"}
         });
 
-        board.addIfFieldIsOpen("X", 0,0);
+        board.addToBoard("X", new int[] {0,0});
 
         assertThat(board.getState()[0][0], is("O"));
     }
@@ -42,9 +41,9 @@ public class BoardTest {
     @Test
     public void shouldReturnTrueWhenBoardHasColumnOfSameSymbol() {
         Board board = new Board( new String[][] {
-                { "X", "_", "_"},
-                { "X", "_", "_"},
-                { "X", "_", "_"}
+                new String[] { "X", "_", "_"},
+                new String[] { "X", "_", "_"},
+                new String[] { "X", "_", "_"}
         });
 
         assertTrue(board.hasThreeInAColumn());
@@ -53,9 +52,9 @@ public class BoardTest {
     @Test
     public void shouldReturnTrueWhenBoardHasRowOfSameSymbol() {
         Board board = new Board( new String[][] {
-                { "_", "_", "_"},
-                { "O", "O", "O"},
-                { "_", "_", "_"}
+                new String[] { "_", "_", "_"},
+                new String[] { "O", "O", "O"},
+                new String[] { "_", "_", "_"}
         });
 
         assertTrue(board.hasThreeInARow());
@@ -64,9 +63,9 @@ public class BoardTest {
     @Test
     public void shouldReturnTrueWhenBoardHasDiagonalOfSameSymbol() {
         Board board = new Board(new String[][] {
-                { "*", "_", "_"},
-                { "_", "*", "_"},
-                { "_", "_", "*"}
+                new String[] { "*", "_", "_"},
+                new String[] { "_", "*", "_"},
+                new String[] { "_", "_", "*"}
         });
 
         assertTrue(board.hasThreeInADiagonal());

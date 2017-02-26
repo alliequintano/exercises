@@ -1,63 +1,69 @@
 package TicTacToe;
 
 
-import java.util.Scanner;
-
 /**
  * Created by alexandraquintano on 2/23/17.
  */
 public class Game {
 
-    public static void main(String[] args) {
-        Game game = new Game(new String[][]{
-                {"_", "_", "_"},
-                {"_", "_", "_"},
-                {"_", "_", "_"}
-            });
-        game.play();
-    }
-
-
     private Board board;
-    private String player1 = "X";
-    private String player2 = "O";
-    private Scanner input = new Scanner(System.in);
+    private Player player1;
+    private Player player2;
 
-
-    public Game(String[][] board) {
-        this.board = new Board(board);
+    public Game(Board board, Player player1, Player player2) {
+        this.board = board;
+        this.player1 = player1;
+        this.player2 = player2;
     }
 
     public void play() {
-        while (true) {
+        int[] move;
+        boolean turnIsOver = false;
+
+        do {
             if (!isGameOver()) {
-                playerTurn(player1);
-                board.printState();
-            } else { break; }
-            if (!isGameOver()) {
-                playerTurn(player2);
-                board.printState();
-            } else { break; }
-        }
+                while (!turnIsOver) {
+                    move = player1.takeTurn(board);
+                    if (!board.fieldIsOpen(move)) {
+                        board = board.addToBoard(player1.symbol, move);
+                        turnIsOver = true;
+                    }
+                    board.printState();
+                }
+                turnIsOver = false;
+            } else break;
+        } while(true);
     }
+//            if (!isGameOver()) {
+//                while (!turnIsOver) {
+//                    move = player1.takeTurn(board);
+//                    if (!board.fieldIsOpen(move)) {
+//                        board = board.addToBoard(player1.symbol, move);
+//                        turnIsOver = true;
+//                    }
+//                    board.printState();
+//                }
+//                    turnIsOver = false;
+//            } else {
+//                break;
+//            }
 
     public boolean isGameOver(){
-        if (board.isFull() || board.hasThreeInARow() || board.hasThreeInAColumn() || board.hasThreeInADiagonal())
+        if (    board.isFull() ||
+                board.hasThreeInARow() ||
+                board.hasThreeInAColumn() ||
+                board.hasThreeInADiagonal())
             return true;
         else
             return false;
     }
-
-    public void playerTurn(String player) {
-        boolean turnIsOver = false;
-        while (!turnIsOver) {
-            System.out.println("Enter a position: ");
-            int col = input.nextInt();
-            int row = input.nextInt();
-            if (board.addIfFieldIsOpen(player, col, row))
-                turnIsOver = true;
-            else
-                System.out.println("That field is taken, try again.");
-        }
-    }
+//
+//    public Board playerTurn(Player player) {
+//
+//        boolean turnIsOver = false;
+//        while (!turnIsOver) {
+//            move = player.takeTurn(board);
+//            board.canAddSymbolToBoard(move)
+//        }
+//    }
 }

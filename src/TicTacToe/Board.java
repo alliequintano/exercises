@@ -1,13 +1,11 @@
 package TicTacToe;
 
 
-import java.util.Arrays;
-
 /**
  * Created by alexandraquintano on 2/23/17.
  */
 public class Board {
-    private String[][] state;
+    private final String[][] state;
 
     public Board(String[][] state) {
         this.state = state;
@@ -17,18 +15,21 @@ public class Board {
         return state;
     }
 
-    public boolean addIfFieldIsOpen(String symbol, int col, int row) {
-        if (!fieldIsTaken(col, row)) {
-            state[col][row] = symbol;
-            return true;
-        } else {
-            return false;
+    public Board addToBoard(String symbol, int[] coordinates) {
+        String[][] newState = new String[3][3];
+        for (int i = 0; i < state[0].length; i++) {
+            for (int j = 0; j < state[0].length; j++) {
+                newState[i][j] = state[i][j];
+            }
         }
+        newState[coordinates[0]][coordinates[1]] = symbol;
+        return new Board(newState);
     }
-    private boolean fieldIsTaken(int col, int row) {
-        if (state[col][row] != "_")
-            return true;
-        return false;
+
+    public boolean fieldIsOpen(int[] coordinates) {
+        if (state[coordinates[0]][coordinates[1]] != "_")
+            return false;
+        return true;
     }
 
     public boolean isFull() {
@@ -42,6 +43,10 @@ public class Board {
     }
 
     public boolean hasThreeInARow() {
+//        state
+//                .stream()
+//                .map(_.stream().filter(_ == 'X').length)
+
         for (String[] row : state) {
             int count = 0;
             for (String field : row) {
