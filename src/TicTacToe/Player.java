@@ -20,7 +20,6 @@ public class Player {
         coordinates[0] = input.nextInt();
         coordinates[1] = input.nextInt();
         return coordinates;
-            //System.out.println("That field is taken, try again.");
     }
 
 }
